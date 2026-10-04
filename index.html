@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Aurien — aplicativos para o cotidiano</title>
+<meta name="description" content="A Aurien cria aplicativos bem pensados para tornar o cotidiano mais simples, organizado e leve. Conheça o Validi e o Aurien Pets.">
+<link rel="icon" href="assets/marca/aurien-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sites-incriveis.css">
+<link rel="stylesheet" href="aurien.css">
+<style>
+  /* ===== cena 1 — abertura ===== */
+  .abertura{
+    position:relative; min-height:100svh;
+    display:grid; align-items:center;
+    padding-block:calc(var(--e7) + 40px) var(--e6);
+    overflow:hidden;
+  }
+  .abertura__grade{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:var(--e5); align-items:center;
+  }
+  .abertura h1{max-width:19ch}
+  .abertura__frase{margin-top:var(--e3); font-size:var(--t-base)}
+  .abertura__acoes{display:flex; gap:var(--e2); flex-wrap:wrap; margin-top:var(--e4)}
+  .abertura__fita{position:relative}
+  /* a fita sangra pela direita: a abertura não é simétrica */
+  .abertura__fita .fita-marca{
+    width:min(128%, 640px); margin-left:auto; margin-right:-10%;
+  }
+  .abertura__brilho{
+    position:absolute; inset:-20% -30% auto auto; width:78vmax; height:78vmax;
+    pointer-events:none; z-index:-1;
+    background:radial-gradient(closest-side, rgba(157,141,241,.17), transparent 72%);
+  }
+  @media (max-width:900px){
+    .abertura__grade{grid-template-columns:1fr; gap:var(--e4)}
+    .abertura__fita{order:-1}
+    .abertura__fita .fita-marca{width:min(84%,380px); margin-inline:auto 0; margin-right:-6%}
+  }
+
+  /* ===== cena 2 — quem é a Aurien ===== */
+  .quem{position:relative}
+  .quem__grade{display:grid; grid-template-columns:.8fr 1.2fr; gap:var(--e5)}
+  .quem__corpo{display:grid; gap:var(--e3)}
+  .quem__corpo p{color:var(--tinta-suave); max-width:60ch}
+  .quem__corpo p:first-child{
+    font-family:var(--display); font-weight:300;
+    font-size:clamp(24px,3.2vw,34px); line-height:1.28; color:var(--tinta);
+    max-width:26ch;
+  }
+  @media (max-width:860px){ .quem__grade{grid-template-columns:1fr; gap:var(--e3)} }
+
+  /* ===== cena 3 — O PICO: o cotidiano se assenta ===== */
+  .pico{background:var(--fundo)}
+  .pico .fx-palco{position:sticky}
+  .pico__palco{
+    position:relative; width:100%; max-width:var(--limite); margin-inline:auto;
+    padding-inline:var(--e3); height:100%;
+    display:grid; align-content:center; justify-items:center; gap:var(--e4);
+  }
+  .pico__dizeres{position:relative; text-align:center; min-height:4.6em; width:100%}
+  .pico__dizer{
+    position:absolute; inset-inline:0; top:0;
+    transition:opacity .6s var(--curva), transform .6s var(--curva);
+  }
+  .pico__dizer[data-vivo="nao"]{opacity:0; transform:translateY(12px)}
+  .pico__dizer[data-vivo="sim"]{opacity:1; transform:none}
+  .pico__dizer h2{margin-top:var(--e2)}
+
+  .enxame{
+    position:relative; width:100%;
+    height:min(52svh, 460px);
+    list-style:none; margin:0; padding:0;
+  }
+  .item{
+    position:absolute; left:50%; top:50%;
+    display:flex; align-items:center; gap:11px;
+    padding:11px 19px; border-radius:999px;
+    border:1px solid var(--borda); background:var(--superficie);
+    color:var(--tinta-suave); font-size:var(--t-pequeno); white-space:nowrap;
+    will-change:transform;
+    transform:translate(-50%,-50%);
+  }
+  .item__ponto{
+    width:7px; height:7px; border-radius:50%; flex:none;
+    background:var(--tinta-fraca); transition:background .5s var(--curva);
+  }
+  .item[data-assentado="sim"]{border-color:var(--borda-forte); color:var(--tinta)}
+  .item[data-assentado="sim"] .item__ponto{background:var(--menta)}
+  @media (max-width:760px){
+    .item{font-size:var(--t-micro); padding:9px 14px}
+    .item[data-opcional="sim"]{display:none}
+    .enxame{height:min(56svh,420px)}
+  }
+
+  /* ===== cena 4 — os aplicativos ===== */
+  .apps__cabecalho{
+    display:flex; align-items:end; justify-content:space-between;
+    gap:var(--e3); flex-wrap:wrap; margin-bottom:var(--e5);
+  }
+  .apps__grade{display:grid; gap:var(--e3); grid-template-columns:1fr 1fr}
+  /* assimetria: o primeiro cartão desce um pouco, quebra a fileira */
+  .apps__grade > :nth-child(2){transform:translateY(var(--e4))}
+  @media (max-width:860px){
+    .apps__grade{grid-template-columns:1fr}
+    .apps__grade > :nth-child(2){transform:none}
+  }
+  .apps__rodape{margin-top:calc(var(--e5) + var(--e4)); display:flex; justify-content:center}
+
+  /* ===== cena 5 — princípios ===== */
+  .principios{background:var(--superficie)}
+  .principios__grade{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--e4); margin-top:var(--e5)}
+  .principio{display:grid; gap:14px; align-content:start}
+  .principio__n{font-family:var(--display); font-size:var(--t-grande); color:var(--acento); line-height:1}
+  .principio h3{font-size:var(--t-medio)}
+  .principio p{color:var(--tinta-suave); font-size:var(--t-pequeno)}
+  @media (max-width:800px){ .principios__grade{grid-template-columns:1fr; gap:var(--e3)} }
+
+  /* ===== cena 6 — fechamento ===== */
+  .fecho{position:relative; overflow:hidden; text-align:center}
+  .fecho__brilho{
+    position:absolute; left:50%; top:62%; translate:-50% -50%;
+    width:92vmax; height:92vmax; pointer-events:none; z-index:-1;
+    background:radial-gradient(closest-side, rgba(157,141,241,.15), transparent 70%);
+  }
+  .fecho h2{max-width:17ch; margin-inline:auto}
+  .fecho__contatos{
+    display:flex; gap:var(--e4); justify-content:center; flex-wrap:wrap;
+    margin-top:var(--e5); font-size:var(--t-pequeno);
+  }
+  .fecho__contatos a{color:var(--tinta); text-decoration:none; border-bottom:1px solid var(--borda-forte); padding-bottom:3px}
+  .fecho__contatos span{display:block; color:var(--tinta-fraca); font-size:var(--t-micro); margin-bottom:6px}
+
+  /* ===== movimento reduzido ===== */
+  .fx-reduzido .pico .fx-palco{height:auto; padding-block:var(--e6)}
+  .fx-reduzido .pico__dizer{position:static; opacity:1; transform:none}
+  .fx-reduzido .pico__dizer[data-vivo="nao"]{display:none}
+  .fx-reduzido .pico__dizeres{min-height:0}
+  .fx-reduzido .enxame{
+    position:static; height:auto; display:grid; gap:10px; justify-items:start;
+    margin-top:var(--e4);
+  }
+  .fx-reduzido .item{position:static; transform:none !important}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="limite topo__linha">
+    <a class="topo__marca" href="./" aria-label="Aurien, página inicial">
+      <img src="assets/marca/aurien-logo-marfim.svg" alt="Aurien">
+    </a>
+    <nav>
+      <ul class="topo__menu">
+        <li><a href="aplicativos/">Aplicativos</a></li>
+        <li><a href="#sobre">A Aurien</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== 1 · abertura ===== -->
+  <section class="abertura">
+    <div class="abertura__brilho" aria-hidden="true"></div>
+    <div class="limite abertura__grade">
+      <div>
+        <p class="rotulo" data-fx="surgir">Aurien</p>
+        <h1 class="maior" data-fx="palavras" style="margin-top:var(--e3)">
+          A Aurien cria aplicativos bem pensados para tornar o cotidiano mais
+          simples, organizado e leve.
+        </h1>
+        <p class="conduz abertura__frase" data-fx="surgir" data-fx-atraso="520">
+          Começamos por dois: o <strong>Validi</strong>, para controle de validades,
+          e o <strong>Aurien Pets</strong>, para o cuidado e o acompanhamento dos pets.
+          Os dois estão em desenvolvimento.
+        </p>
+        <div class="abertura__acoes" data-fx="subir" data-fx-atraso="700">
+          <a class="botao" href="aplicativos/">
+            Ver os aplicativos
+            <svg class="botao__seta" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="botao botao--vazado" href="#sobre">Conhecer a Aurien</a>
+        </div>
+      </div>
+      <div class="abertura__fita" data-fx-mouse="9">
+        <div class="fita-marca" id="fitaAbertura" role="img"
+             aria-label="Símbolo da Aurien: uma fita contínua dobrada na forma da letra A"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2 · quem é a Aurien ===== -->
+  <section class="secao quem" id="sobre">
+    <div class="limite quem__grade">
+      <p class="rotulo">A Aurien</p>
+      <div class="quem__corpo">
+        <p data-fx="subir">
+          A Aurien nasceu da vontade de ter, na palma da mão, informações que
+          ajudassem a compreender o presente e enxergar possibilidades para o futuro.
+        </p>
+        <p data-fx="subir" data-fx-atraso="160">
+          Criamos aplicativos com propósito: conectar informações, cuidados e metas
+          à história de cada pessoa. Nossa visão é oferecer experiências que ajudem
+          você a reconhecer onde está, compreender suas escolhas e explorar caminhos
+          para o que deseja alcançar.
+        </p>
+        <p data-fx="subir" data-fx-atraso="300">
+          Cada pessoa tem seu contexto, seu ritmo e seus planos. Queremos acompanhar
+          essa jornada, dando sentido ao que se organiza hoje e continuidade ao que
+          se deseja construir — com cuidado pelo que importa em cada etapa.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3 · PICO — o cotidiano se assenta ===== -->
+  <section class="secao pico" data-fx-fixa data-fx-altura="4" id="cotidiano">
+    <div class="fx-palco">
+      <div class="pico__palco">
+
+        <div class="pico__dizeres">
+          <div class="pico__dizer" data-dizer="0" data-vivo="sim">
+            <p class="rotulo">O cotidiano</p>
+            <h2 class="grande">Tudo isso fica na sua cabeça.</h2>
+          </div>
+          <div class="pico__dizer" data-dizer="1" data-vivo="nao">
+            <p class="rotulo">O cotidiano</p>
+            <h2 class="grande">E some justo no dia que importava.</h2>
+          </div>
+          <div class="pico__dizer" data-dizer="2" data-vivo="nao">
+            <p class="rotulo rotulo--acento">A Aurien</p>
+            <h2 class="grande">Cada coisa volta na hora certa.</h2>
+          </div>
+        </div>
+
+        <ul class="enxame" id="enxame">
+          <li class="item"><span class="item__ponto" aria-hidden="true"></span>o leite que vence quinta</li>
+          <li class="item"><span class="item__ponto" aria-hidden="true"></span>a vacina do cachorro</li>
+          <li class="item"><span class="item__ponto" aria-hidden="true"></span>o remédio que acaba domingo</li>
+          <li class="item"><span class="item__ponto" aria-hidden="true"></span>o filtro do purificador</li>
+          <li class="item"><span class="item__ponto" aria-hidden="true"></span>a ração que está no fim</li>
+          <li class="item" data-opcional="sim"><span class="item__ponto" aria-hidden="true"></span>o vermífugo atrasado</li>
+          <li class="item" data-opcional="sim"><span class="item__ponto" aria-hidden="true"></span>o iogurte no fundo da geladeira</li>
+          <li class="item" data-opcional="sim"><span class="item__ponto" aria-hidden="true"></span>a consulta para remarcar</li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4 · os aplicativos ===== -->
+  <section class="secao" id="aplicativos">
+    <div class="limite">
+      <div class="apps__cabecalho">
+        <div class="cabecalho-secao">
+          <p class="rotulo" data-fx="surgir">Os aplicativos</p>
+          <h2 class="maior" data-fx="subir">Dois começos, a mesma ideia.</h2>
+        </div>
+        <p class="conduz conduz--estreito pequeno" data-fx="surgir" data-fx-atraso="200">
+          Cada aplicativo resolve uma área do dia a dia — e nenhum deles existe
+          para ser usado o tempo todo. Existe para você não precisar lembrar.
+        </p>
+      </div>
+
+      <div class="apps__grade">
+
+        <a class="app app--validi" href="validi/" data-fx="subir">
+          <div class="app__topo">
+            <div class="app__marca">
+              <span class="app__icone"><img src="assets/apps/validi_symbol.svg" alt=""></span>
+              <span>
+                <span class="app__nome">Validi</span><br>
+                <span class="app__area">Controle de validades</span>
+              </span>
+            </div>
+            <span class="selo"><span class="selo__ponto" aria-hidden="true"></span>Em desenvolvimento</span>
+          </div>
+          <p class="app__texto">
+            Saber o que vence, quando vence e o que ainda dá tempo de aproveitar.
+            Seus produtos organizados por categoria e por onde ficam guardados,
+            com aviso antes da data — não depois.
+          </p>
+          <span class="app__ir">
+            Conhecer o aplicativo
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+
+        <a class="app app--pets" href="aurien-pets/" data-fx="subir" data-fx-atraso="170">
+          <div class="app__topo">
+            <div class="app__marca">
+              <span class="app__icone"><img src="assets/apps/aurien_pets_symbol.png" alt=""></span>
+              <span>
+                <span class="app__nome">Aurien Pets</span><br>
+                <span class="app__area">Cuidado e acompanhamento</span>
+              </span>
+            </div>
+            <span class="selo"><span class="selo__ponto" aria-hidden="true"></span>Em desenvolvimento</span>
+          </div>
+          <p class="app__texto">
+            Um sistema de cuidado adaptativo: cada pet tem necessidades próprias e
+            cada cuidado pode ter alguém responsável — preservando contexto e
+            continuidade ao longo da vida.
+          </p>
+          <span class="app__ir">
+            Conhecer o aplicativo
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+
+      </div>
+
+      <div class="apps__rodape">
+        <a class="botao botao--vazado" href="aplicativos/">Ver todos os aplicativos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5 · princípios ===== -->
+  <section class="secao principios" data-fx-fundo="#0E1528" data-fx-tinta="#F5F2EC">
+    <div class="limite">
+      <div class="cabecalho-secao cabecalho-secao--direita">
+        <p class="rotulo">Como trabalhamos</p>
+        <h2 class="grande editorial">Três coisas que não negociamos.</h2>
+      </div>
+      <div class="principios__grade">
+        <article class="principio" data-fx="subir">
+          <p class="principio__n">01</p>
+          <h3>Simplicidade</h3>
+          <p>Cada aplicativo resolve uma coisa, e resolve inteira. O que não ajuda no dia a dia não entra.</p>
+        </article>
+        <article class="principio" data-fx="subir" data-fx-atraso="150">
+          <p class="principio__n">02</p>
+          <h3>Organização</h3>
+          <p>O que você precisa lembrar fica guardado em algum lugar confiável — e volta na hora certa.</p>
+        </article>
+        <article class="principio" data-fx="subir" data-fx-atraso="300">
+          <p class="principio__n">03</p>
+          <h3>Cuidado com o cotidiano</h3>
+          <p>Uma mesma marca, muitas soluções. Cada aplicativo novo é mais uma face da mesma fita.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6 · fechamento ===== -->
+  <section class="secao fecho" id="contato" data-fx-fundo="#070B16" data-fx-tinta="#F5F2EC">
+    <div class="fecho__brilho" aria-hidden="true"></div>
+    <div class="limite">
+      <p class="rotulo" data-fx="surgir">Aurien</p>
+      <h2 class="maior editorial" data-fx="subir" style="margin-top:var(--e3)">
+        Os aplicativos ainda estão sendo feitos. A ideia já está pronta.
+      </h2>
+      <div style="margin-top:var(--e4); display:flex; justify-content:center" data-fx="subir" data-fx-atraso="200">
+        <a class="botao" href="aplicativos/">
+          Conhecer os aplicativos
+          <svg class="botao__seta" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="fecho__contatos" data-fx="surgir" data-fx-atraso="340">
+        <p><span>Institucional</span><a href="mailto:contato@aurien.com.br">contato@aurien.com.br</a></p>
+        <p><span>Suporte aos aplicativos</span><a href="mailto:suporte@aurien.com.br">suporte@aurien.com.br</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="limite">
+    <div class="rodape__grade">
+      <div class="rodape__marca">
+        <img src="assets/marca/aurien-logo-marfim.svg" alt="Aurien">
+        <p class="conduz pequeno">
+          Aplicativos bem pensados para tornar o cotidiano mais simples,
+          organizado e leve.
+        </p>
+      </div>
+      <div>
+        <h3>Aplicativos</h3>
+        <ul>
+          <li><a href="aplicativos/">Todos os aplicativos</a></li>
+          <li><a href="validi/">Validi</a></li>
+          <li><a href="aurien-pets/">Aurien Pets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Aurien</h3>
+        <ul>
+          <li><a href="#sobre">A empresa</a></li>
+          <li><a href="mailto:contato@aurien.com.br">contato@aurien.com.br</a></li>
+          <li><a href="mailto:suporte@aurien.com.br">suporte@aurien.com.br</a></li>
+          <li><a href="privacidade/validi/">Privacidade do Validi</a></li>
+          <li><a href="privacidade/aurien-pets/">Privacidade do Aurien Pets</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__fim">
+      <p>Aurien</p>
+      <p>Validi e Aurien Pets estão em desenvolvimento.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="sites-incriveis.js" defer></script>
+<script src="fita3d.js" defer></script>
+<script src="assets/marca/fita3d-dados.js" defer></script>
+<script src="aurien.js" defer></script>
+
+<style>
+  .previa-selo{
+    position:fixed; left:14px; bottom:14px; z-index:9999; pointer-events:none;
+    display:flex; align-items:center; gap:8px;
+    padding:7px 13px; border-radius:999px;
+    border:1px solid rgba(157,141,241,.34);
+    background:rgba(7,11,22,.76); backdrop-filter:blur(10px);
+    font-family:"Manrope",system-ui,sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:.04em; color:#A5AEC6;
+  }
+  .previa-selo b{color:#9D8DF1; font-weight:800}
+  @media (max-width:520px){ .previa-selo{font-size:10px; padding:6px 10px; left:10px; bottom:10px} }
+  @media print{ .previa-selo{display:none} }
+</style>
+<p class="previa-selo"><b>Prévia</b> em revisão — não é o site oficial da Aurien</p>
+</body>
+</html>

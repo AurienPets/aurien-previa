@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Validi — controle de validades | Aurien</title>
+<meta name="description" content="Validi, da Aurien: saber o que vence, quando vence e o que ainda dá tempo de aproveitar. Em desenvolvimento.">
+<link rel="icon" href="../assets/marca/aurien-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../sites-incriveis.css">
+<link rel="stylesheet" href="../aurien.css">
+<style>
+  :root{
+    --app:#F97316;
+    --app-2:#84C216;
+    --app-luz:rgba(249,115,22,.20);
+  }
+  /* os estados do Validi, como o aplicativo os define */
+  .estados{display:grid; gap:10px; margin-top:var(--e4)}
+  .estado{
+    display:grid; grid-template-columns:auto auto 1fr; gap:14px; align-items:center;
+    padding:13px var(--e3); border-radius:14px;
+    border:1px solid var(--borda); background:var(--superficie);
+    font-size:var(--t-pequeno);
+  }
+  .estado__bola{width:10px; height:10px; border-radius:50%}
+  .estado__nome{font-weight:700; color:var(--tinta)}
+  .estado__quando{color:var(--tinta-suave)}
+  .estado--vencido .estado__bola{background:#EF4444}
+  .estado--hoje .estado__bola{background:#F59E0B}
+  .estado--proximo .estado__bola{background:#EAB308}
+  .estado--emdia .estado__bola{background:#22C55E}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="limite topo__linha">
+    <a class="topo__marca" href="../" aria-label="Aurien, página inicial">
+      <img src="../assets/marca/aurien-logo-marfim.svg" alt="Aurien">
+    </a>
+    <nav>
+      <ul class="topo__menu">
+        <li><a href="../aplicativos/">Aplicativos</a></li>
+        <li><a href="../#sobre">A Aurien</a></li>
+        <li><a href="../#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="capa-app">
+    <div class="capa-app__luz" aria-hidden="true"></div>
+    <div class="limite capa-app__grade">
+      <div>
+        <div class="faixa-cor" data-fx="surgir" aria-hidden="true"></div>
+        <p class="rotulo" data-fx="surgir" style="margin-top:var(--e2)">Validi · controle de validades</p>
+        <h1 class="maior" data-fx="subir">O que vence, antes de vencer.</h1>
+        <p class="conduz" data-fx="surgir" data-fx-atraso="200">
+          O Validi guarda a validade do que você tem em casa e avisa com
+          antecedência — não depois. Os produtos ficam organizados por categoria
+          e por onde estão guardados, e cada um mostra em que pé está.
+        </p>
+        <div class="capa-app__acoes" data-fx="subir" data-fx-atraso="320">
+          <span class="selo"><span class="selo__ponto" aria-hidden="true"></span>Em desenvolvimento</span>
+          <a class="botao botao--vazado" href="#detalhes">Ver o que já está definido</a>
+        </div>
+      </div>
+
+      <figure class="retrato" data-fx="crescer">
+        <div class="retrato__marca">
+          <img src="../assets/apps/validi_symbol.svg" alt="Símbolo do Validi">
+          <p class="retrato__nome">Validi</p>
+        </div>
+        <figcaption>Ainda sem capturas de tela: o aplicativo está em desenvolvimento.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="secao--curta" id="detalhes">
+    <div class="limite">
+      <div class="cabecalho-secao">
+        <p class="rotulo">Para que serve</p>
+        <h2 class="grande" data-fx="subir">Três perguntas, respondidas sem esforço.</h2>
+      </div>
+
+      <div class="beneficios">
+        <article class="beneficio" data-fx="subir">
+          <p class="beneficio__n">01</p>
+          <h3>O que eu tenho</h3>
+          <p>
+            Cada produto cadastrado com sua categoria e o local onde está guardado.
+            As categorias são suas: existem as padrão e as que você criar.
+          </p>
+        </article>
+        <article class="beneficio" data-fx="subir" data-fx-atraso="140">
+          <p class="beneficio__n">02</p>
+          <h3>O que está para vencer</h3>
+          <p>
+            Cada produto mostra o seu estado, e o estado nunca é comunicado só
+            por cor: vem sempre com ícone e texto junto.
+          </p>
+        </article>
+        <article class="beneficio" data-fx="subir" data-fx-atraso="280">
+          <p class="beneficio__n">03</p>
+          <h3>Quando eu preciso saber</h3>
+          <p>
+            Aviso no aparelho, com a antecedência que você configurar — para dar
+            tempo de usar, congelar ou repor.
+          </p>
+        </article>
+      </div>
+
+      <div class="detalhes">
+        <div>
+          <p class="rotulo">Os estados</p>
+          <p class="conduz pequeno" style="margin-top:var(--e2)">
+            A janela visual de “próximo do vencimento” é de sete dias corridos.
+            Ela é independente da antecedência que você escolhe para os avisos.
+          </p>
+        </div>
+        <div class="estados">
+          <p class="estado estado--vencido">
+            <span class="estado__bola" aria-hidden="true"></span>
+            <span class="estado__nome">Vencido</span>
+            <span class="estado__quando">a data já passou</span>
+          </p>
+          <p class="estado estado--hoje">
+            <span class="estado__bola" aria-hidden="true"></span>
+            <span class="estado__nome">Vence hoje</span>
+            <span class="estado__quando">é o último dia</span>
+          </p>
+          <p class="estado estado--proximo">
+            <span class="estado__bola" aria-hidden="true"></span>
+            <span class="estado__nome">Próximo</span>
+            <span class="estado__quando">vence em até sete dias</span>
+          </p>
+          <p class="estado estado--emdia">
+            <span class="estado__bola" aria-hidden="true"></span>
+            <span class="estado__nome">Em dia</span>
+            <span class="estado__quando">ainda há tempo</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta" style="padding-top:0">
+    <div class="limite">
+      <div class="cabecalho-secao">
+        <p class="rotulo">Decisões já tomadas</p>
+        <h2 class="grande" data-fx="subir">O que já está definido no projeto.</h2>
+        <p class="conduz pequeno">
+          Isto não é uma lista de promessas: é o que já está especificado e em
+          construção. O que ainda não foi decidido não aparece aqui.
+        </p>
+      </div>
+
+      <div class="blocos">
+        <article class="bloco" data-fx="subir">
+          <h3>Funciona sem internet</h3>
+          <p>Os dados ficam no seu aparelho. O aplicativo é pensado para funcionar offline.</p>
+        </article>
+        <article class="bloco" data-fx="subir" data-fx-atraso="100">
+          <h3>Leitura de código de barras</h3>
+          <p>Escanear para preencher o produto, com o nome vindo de uma base pública de produtos.</p>
+        </article>
+        <article class="bloco" data-fx="subir" data-fx-atraso="200">
+          <h3>Categorias administráveis</h3>
+          <p>Criar, renomear e excluir categorias — e não depender do que uma base externa devolve.</p>
+        </article>
+        <article class="bloco" data-fx="subir" data-fx-atraso="300">
+          <h3>Locais de armazenamento</h3>
+          <p>Saber não só o que vence, mas onde está guardado.</p>
+        </article>
+        <article class="bloco" data-fx="subir" data-fx-atraso="400">
+          <h3>Importar lista de compras</h3>
+          <p>Trazer de uma vez o que você acabou de comprar, em vez de cadastrar item a item.</p>
+        </article>
+        <article class="bloco" data-fx="subir" data-fx-atraso="500">
+          <h3>Acessibilidade</h3>
+          <p>Estado nunca comunicado só por cor, e contraste verificado como parte do desenvolvimento.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta" style="padding-top:0">
+    <div class="limite">
+      <div class="blocos">
+        <article class="bloco" data-fx="surgir">
+          <h3>Status</h3>
+          <p>Em desenvolvimento. Ainda não está disponível para download.</p>
+        </article>
+        <article class="bloco" data-fx="surgir" data-fx-atraso="120">
+          <h3>Suporte</h3>
+          <p>Dúvidas sobre o aplicativo:</p>
+          <a href="mailto:suporte@aurien.com.br">suporte@aurien.com.br</a>
+        </article>
+        <article class="bloco" data-fx="surgir" data-fx-atraso="240">
+          <h3>Privacidade</h3>
+          <p>A política do Validi está em rascunho.</p>
+          <a href="../privacidade/validi/">Ver a política de privacidade</a>
+        </article>
+        <article class="bloco" data-fx="surgir" data-fx-atraso="360">
+          <h3>Outros aplicativos</h3>
+          <p>A Aurien tem mais de um.</p>
+          <a href="../aplicativos/">Ver todos os aplicativos</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="limite">
+    <div class="rodape__grade">
+      <div class="rodape__marca">
+        <img src="../assets/marca/aurien-logo-marfim.svg" alt="Aurien">
+        <p class="conduz pequeno">
+          Aplicativos bem pensados para tornar o cotidiano mais simples,
+          organizado e leve.
+        </p>
+      </div>
+      <div>
+        <h3>Aplicativos</h3>
+        <ul>
+          <li><a href="../aplicativos/">Todos os aplicativos</a></li>
+          <li><a href="./">Validi</a></li>
+          <li><a href="../aurien-pets/">Aurien Pets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Aurien</h3>
+        <ul>
+          <li><a href="../#sobre">A empresa</a></li>
+          <li><a href="mailto:contato@aurien.com.br">contato@aurien.com.br</a></li>
+          <li><a href="mailto:suporte@aurien.com.br">suporte@aurien.com.br</a></li>
+          <li><a href="../privacidade/validi/">Privacidade do Validi</a></li>
+          <li><a href="../privacidade/aurien-pets/">Privacidade do Aurien Pets</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__fim">
+      <p>Aurien</p>
+      <p>Validi e Aurien Pets estão em desenvolvimento.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../sites-incriveis.js" defer></script>
+<script src="../aurien.js" defer></script>
+
+<style>
+  .previa-selo{
+    position:fixed; left:14px; bottom:14px; z-index:9999; pointer-events:none;
+    display:flex; align-items:center; gap:8px;
+    padding:7px 13px; border-radius:999px;
+    border:1px solid rgba(157,141,241,.34);
+    background:rgba(7,11,22,.76); backdrop-filter:blur(10px);
+    font-family:"Manrope",system-ui,sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:.04em; color:#A5AEC6;
+  }
+  .previa-selo b{color:#9D8DF1; font-weight:800}
+  @media (max-width:520px){ .previa-selo{font-size:10px; padding:6px 10px; left:10px; bottom:10px} }
+  @media print{ .previa-selo{display:none} }
+</style>
+<p class="previa-selo"><b>Prévia</b> em revisão — não é o site oficial da Aurien</p>
+</body>
+</html>
