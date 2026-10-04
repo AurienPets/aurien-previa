@@ -236,10 +236,11 @@ ul{margin:0; padding:0; list-style:none}
   background:#F3EFE6; border-radius:16px;
   padding:9px;
 }
-/* O emblema do Aurien Pets é um círculo que preenche o quadrado inteiro; o
-   símbolo do Validi é um V estreito e mais baixo que largo. Com a mesma
-   margem, o círculo pesaria mais. A folga maior aqui iguala os dois no olho. */
-.marca-app--pets{padding:14px}
+/* Os dois ícones oficiais têm proporções diferentes — o do Validi é mais
+   largo que alto, o do Aurien Pets é mais alto que largo — e o emblema do
+   Pets tem muito detalhe fino. A folga menor aqui equilibra o peso dos dois
+   na placa e dá ao emblema a área de que ele precisa para ser lido. */
+.marca-app--pets{padding:6px}
 .marca-app img{width:100%; height:100%; object-fit:contain}
 
 .cartao__nome{
