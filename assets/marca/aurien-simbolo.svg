@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="858" viewBox="115 31 452 388" fill="none">
+<title>Símbolo Aurien</title>
+<desc>Símbolo vetorial reconstruído a partir da referência, com três superfícies de fita e fundo transparente.</desc>
+<defs>
+ <linearGradient id="right" x1="371" y1="124" x2="535" y2="333" gradientUnits="userSpaceOnUse"><stop stop-color="#101D48"/><stop offset=".35" stop-color="#244A97"/><stop offset=".68" stop-color="#439EC2"/><stop offset="1" stop-color="#A7F4DF"/></linearGradient>
+ <linearGradient id="left" x1="184" y1="329" x2="366" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#102652"/><stop offset=".29" stop-color="#425DCD"/><stop offset=".57" stop-color="#AC86F5"/><stop offset=".8" stop-color="#C2A0F9"/><stop offset="1" stop-color="#7B74E5"/></linearGradient>
+ <linearGradient id="under" x1="139" y1="358" x2="295" y2="355" gradientUnits="userSpaceOnUse"><stop stop-color="#294994"/><stop offset=".4" stop-color="#233E80"/><stop offset="1" stop-color="#0E1D42"/></linearGradient>
+ <linearGradient id="front" x1="231" y1="292" x2="505" y2="378" gradientUnits="userSpaceOnUse"><stop stop-color="#B79CEE"/><stop offset=".35" stop-color="#A18AF0"/><stop offset=".67" stop-color="#A8E8EB"/><stop offset="1" stop-color="#AFF7E2"/></linearGradient>
+ <radialGradient id="shine" cx="0" cy="0" r="1" gradientTransform="translate(268 176) rotate(-64) scale(134 61)" gradientUnits="userSpaceOnUse"><stop stop-color="#C5A2FF" stop-opacity=".5"/><stop offset="1" stop-color="#C5A2FF" stop-opacity="0"/></radialGradient>
+</defs>
+<g id="aurien-symbol">
+ <path id="right-fold" d="M344 159 C356 122 377 69 404 75 C416 90 430 119 449 155 L545 332 C553 348 560 360 554 371 C535 395 477 384 418 311 Z" fill="url(#right)"/>
+ <path id="lower-fold" d="M127 365 C155 326 202 289 243 284 C276 279 306 301 329 320 C297 333 271 357 238 383 C211 405 174 413 147 403 C128 397 122 384 127 365Z" fill="url(#under)"/>
+ <path id="ascending-ribbon" d="M127 365 C146 322 175 273 203 223 L267 112 C289 75 307 49 332 43 C360 35 387 46 404 75 C381 71 358 124 344 159 L319 215 C307 242 292 261 274 280 C227 287 171 324 127 365Z" fill="url(#left)"/>
+ <path d="M127 365 C146 322 175 273 203 223 L267 112 C289 75 307 49 332 43 C360 35 387 46 404 75 C381 71 358 124 344 159 L319 215 C307 242 292 261 274 280 C227 287 171 324 127 365Z" fill="url(#shine)"/>
+ <path id="front-ribbon" d="M204 307 C233 287 276 270 312 272 C356 272 395 291 428 319 C463 347 503 382 534 375 C545 373 552 367 556 359 C562 384 537 401 507 407 C467 418 429 399 397 375 L333 325 C288 294 247 289 204 307Z" fill="url(#front)"/>
+</g>
+</svg>

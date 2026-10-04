@@ -1,0 +1,403 @@
+/* ============================================================
+   Aurien — site institucional
+   Um arquivo de estilo para todas as páginas. Sem build, sem framework.
+   ============================================================ */
+
+:root{
+  /* --- cor --- */
+  --bg:#080C18;
+  --surface:#101728;
+  --surface-hover:#151E33;
+  --text:#F3EFE6;
+  --text-secondary:#B8BFCE;
+  --accent:#A28BF4;
+  --accent-hover:#B39EFA;
+  --blue:#526FCE;
+  --turquoise:#75CDBB;
+  --border:rgba(184,191,206,0.16);
+
+  /* Tinta sobre o violeta do botão. Conferido: 6,7:1 contra --accent. */
+  --sobre-acento:#141022;
+
+  /* --- espaço: múltiplos de 8 --- */
+  --e1:8px;  --e2:16px; --e3:24px; --e4:32px;
+  --e5:40px; --e6:48px; --e7:64px; --e8:80px;
+
+  --container:1200px;
+  --margem:24px;        /* celular */
+  --secao-y:48px;       /* celular */
+  --raio:20px;
+
+  --texto:"Manrope", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --transicao:180ms cubic-bezier(.22,.61,.36,1);
+}
+
+@media (min-width:640px){
+  :root{ --margem:40px; --secao-y:64px }
+}
+@media (min-width:960px){
+  :root{ --margem:48px; --secao-y:80px }
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--texto);
+  font-size:17px;
+  font-weight:400;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.02em; line-height:1.14}
+p{margin:0}
+img,svg{display:block; max-width:100%}
+a{color:inherit}
+ul{margin:0; padding:0; list-style:none}
+
+/* ---------- utilidades ---------- */
+
+.limite{
+  width:100%; max-width:var(--container);
+  margin-inline:auto; padding-inline:var(--margem);
+}
+
+.secao{padding-block:var(--secao-y)}
+
+.sobrancelha{
+  font-size:13px; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--text-secondary);
+}
+
+.titulo-secao{font-size:clamp(28px,3vw,40px); line-height:1.12}
+
+.conduz{color:var(--text-secondary); max-width:65ch}
+
+/* Some do desenho, continua para quem lê por leitor de tela. */
+.so-leitor{
+  position:absolute; width:1px; height:1px;
+  padding:0; margin:-1px; overflow:hidden;
+  clip-path:inset(50%); white-space:nowrap; border:0;
+}
+
+/* ---------- cabeçalho ---------- */
+
+.topo{border-bottom:1px solid var(--border)}
+.topo__linha{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:var(--e3); min-height:80px; flex-wrap:wrap;
+}
+/* A assinatura deitada é a oficial para fundo escuro: nome em marfim. */
+.topo__marca{display:inline-flex; align-items:center; text-decoration:none; padding-block:var(--e2)}
+.topo__marca img{width:156px; height:auto}
+
+.menu{display:flex; align-items:center; gap:var(--e3); flex-wrap:wrap}
+.menu a{
+  text-decoration:none; font-size:16px; font-weight:500;
+  color:var(--text-secondary);
+  padding:10px 2px; display:inline-block;
+  transition:color var(--transicao);
+}
+.menu a:hover, .menu a:focus-visible{color:var(--text)}
+
+/* No celular os três destinos descem para uma segunda linha compacta.
+   Nenhum deles é escondido: são só três. */
+@media (max-width:639px){
+  .topo__linha{
+    flex-direction:column; align-items:flex-start;
+    gap:0; min-height:0; padding-block:var(--e2);
+  }
+  .topo__marca{padding-block:var(--e1)}
+  .topo__marca img{width:140px}
+  .menu{gap:var(--e3); padding-bottom:var(--e1)}
+  .menu a{font-size:15px}
+}
+
+/* ---------- botão ---------- */
+
+.botao{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  min-height:48px; padding:0 var(--e3);
+  font:inherit; font-size:16px; font-weight:700;
+  text-decoration:none; cursor:pointer;
+  border:1px solid transparent; border-radius:999px;
+  background:var(--accent); color:var(--sobre-acento);
+  transition:background var(--transicao);
+}
+.botao:hover, .botao:focus-visible{background:var(--accent-hover)}
+
+/* ---------- abertura ---------- */
+
+.abertura{position:relative; isolation:isolate}
+.abertura__grade{
+  display:grid; gap:var(--e5); align-items:center;
+  padding-block:var(--secao-y);
+}
+@media (min-width:960px){
+  .abertura__grade{grid-template-columns:55fr 45fr; gap:var(--e5)}
+}
+
+.abertura h1{
+  font-size:clamp(38px,4.6vw,64px); font-weight:600;
+  line-height:1.08; letter-spacing:-.025em;
+  margin-top:var(--e3);
+}
+.abertura__frase{margin-top:var(--e3); font-size:18px; color:var(--text-secondary); max-width:46ch}
+.abertura__acao{margin-top:var(--e5)}
+
+/* No celular o texto vem primeiro e o símbolo depois, sem empurrar
+   os aplicativos para longe. */
+.abertura__simbolo{justify-self:center}
+.abertura__simbolo img{width:min(100%, 230px); height:auto}
+@media (min-width:960px){
+  .abertura__simbolo img{width:min(100%, 400px)}
+}
+
+/* ---------- atmosfera: estrelas e luz ----------
+   Camada puramente decorativa, isolada do conteúdo. Fica atrás de tudo,
+   não recebe clique e não é anunciada por leitor de tela. O recorte abaixo
+   contém a própria decoração; o conteúdo não depende dele. */
+
+.atmosfera{
+  position:absolute; inset:0; z-index:-1;
+  overflow:hidden; pointer-events:none;
+}
+
+.estrela{
+  position:absolute;
+  left:var(--x); top:var(--y);
+  width:var(--d,1px); height:var(--d,1px);
+  border-radius:50%;
+  background:var(--text);
+  opacity:var(--o,.3);
+}
+/* No celular fica só o conjunto essencial de estrelas. */
+@media (max-width:639px){ .estrela--extra{display:none} }
+
+.luz{position:absolute; border-radius:50%}
+.luz--violeta{
+  right:-6%; top:-14%; width:min(70vw,620px); aspect-ratio:1;
+  background:radial-gradient(closest-side, rgba(162,139,244,.30), rgba(162,139,244,0) 72%);
+}
+.luz--azul{
+  right:14%; bottom:-24%; width:min(62vw,520px); aspect-ratio:1;
+  background:radial-gradient(closest-side, rgba(82,111,206,.26), rgba(82,111,206,0) 72%);
+}
+.luz--turquesa{
+  right:-2%; bottom:6%; width:min(44vw,380px); aspect-ratio:1;
+  background:radial-gradient(closest-side, rgba(117,205,187,.18), rgba(117,205,187,0) 70%);
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .luz--violeta{animation:respirar 22s ease-in-out infinite alternate}
+  .luz--azul{animation:respirar2 19s ease-in-out infinite alternate}
+  .luz--turquesa{animation:respirar 24s ease-in-out infinite alternate}
+}
+/* Só transform e opacity: nada de animar blur ou sombra. */
+@keyframes respirar{
+  from{transform:translate3d(0,0,0) scale(1); opacity:.85}
+  to  {transform:translate3d(-14px,16px,0) scale(1.05); opacity:1}
+}
+@keyframes respirar2{
+  from{transform:translate3d(0,0,0) scale(1.04); opacity:1}
+  to  {transform:translate3d(18px,-12px,0) scale(1); opacity:.85}
+}
+
+/* ---------- aplicativos ---------- */
+
+.apps{display:grid; gap:var(--e3); margin-top:var(--e6)}
+@media (min-width:640px){ .apps{grid-template-columns:1fr 1fr} }
+
+.cartao{
+  display:flex; flex-direction:column; gap:var(--e3);
+  padding:var(--e3);
+  border:1px solid var(--border); border-radius:var(--raio);
+  background:var(--surface);
+  transition:background var(--transicao), border-color var(--transicao), transform var(--transicao);
+}
+@media (min-width:960px){ .cartao{padding:var(--e4)} }
+@media (hover:hover){
+  .cartao:hover{background:var(--surface-hover); border-color:rgba(184,191,206,.28); transform:translateY(-3px)}
+}
+.cartao:focus-within{border-color:rgba(184,191,206,.28)}
+
+/* O lettering do Validi é quase preto: sobre o cartão escuro ele sumiria.
+   A superfície clara existe para isso — o arquivo não é recolorido. */
+.marca-app{
+  display:inline-flex; align-items:center; gap:14px;
+  background:#F6F3EC; border-radius:14px;
+  padding:12px 16px; align-self:flex-start;
+}
+.marca-app--simbolo{padding:10px; border-radius:16px}
+.marca-app img{height:34px; width:auto}
+.marca-app--simbolo img{height:46px}
+
+.cartao h3{font-size:22px}
+.cartao__nome{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+
+.cartao__desc{color:var(--text-secondary); max-width:46ch}
+
+.estado{
+  display:inline-flex; align-items:center; gap:9px;
+  align-self:flex-start;
+  font-size:13px; font-weight:700; letter-spacing:.06em;
+  padding:6px 14px; border-radius:999px;
+  border:1px solid var(--border); background:rgba(162,139,244,.08);
+  color:var(--text-secondary);
+}
+.estado__ponto{width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none}
+
+/* Os links encostam na base: com margin-top:auto os dois cartões alinham. */
+.cartao__links{
+  margin-top:auto; padding-top:var(--e2);
+  border-top:1px solid var(--border);
+  display:flex; flex-wrap:wrap; gap:var(--e1) var(--e3);
+}
+.cartao__links a{
+  display:inline-block; padding:10px 0;
+  font-size:15px; font-weight:600; color:var(--accent);
+  text-decoration:none;
+  transition:color var(--transicao);
+}
+.cartao__links a:hover, .cartao__links a:focus-visible{color:var(--accent-hover); text-decoration:underline}
+
+/* ---------- sobre ---------- */
+
+.sobre{position:relative}
+.sobre__grade{display:grid; gap:var(--e5)}
+@media (min-width:960px){
+  .sobre__grade{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr); gap:var(--e8); align-items:start}
+}
+.sobre__texto{display:grid; gap:var(--e3)}
+.sobre__texto p{color:var(--text-secondary); max-width:65ch}
+
+/* Pequeno agrupamento de luz ao lado do texto. Sem linhas, sem movimento. */
+.constelacao{position:relative; height:84px; margin-top:var(--e3)}
+.constelacao span{
+  position:absolute; left:var(--x); top:var(--y);
+  width:var(--d,3px); height:var(--d,3px); border-radius:50%;
+  background:var(--turquoise); opacity:var(--o,.5);
+}
+
+/* ---------- contato e rodapé ---------- */
+
+.contato{border-top:1px solid var(--border)}
+.contato__grade{display:grid; gap:var(--e5)}
+@media (min-width:640px){ .contato__grade{grid-template-columns:1fr 1fr} }
+@media (min-width:960px){ .contato__grade{grid-template-columns:1.4fr 1fr 1fr} }
+
+.contato h3{
+  font-size:13px; font-weight:700; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--text-secondary);
+}
+.contato ul{margin-top:var(--e2); display:grid; gap:var(--e1)}
+.contato a{
+  display:inline-block; padding:8px 0;
+  color:var(--text); font-size:16px; text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:border-color var(--transicao);
+}
+.contato a:hover, .contato a:focus-visible{border-bottom-color:var(--accent)}
+.contato__marca img{width:156px; height:auto}
+.contato__marca p{margin-top:var(--e2); color:var(--text-secondary); font-size:15px; max-width:38ch}
+
+.rodape{
+  border-top:1px solid var(--border);
+  padding-block:var(--e3);
+  display:flex; justify-content:space-between; gap:var(--e2);
+  flex-wrap:wrap;
+  font-size:14px; color:var(--text-secondary);
+}
+
+/* ---------- foco ---------- */
+
+:where(a,button,[tabindex]):focus-visible{
+  outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;
+}
+
+/* ---------- entrada dos elementos ----------
+   O conteúdo é visível por padrão. Só quando o JavaScript confirma que está
+   vivo (classe .js no html) é que ele parte de baixo e aparece. Falha de
+   script nunca esconde nada. */
+
+.js .revelar{opacity:0; transform:translateY(12px)}
+.js .revelar.visivel{
+  opacity:1; transform:none;
+  transition:opacity 480ms ease-out, transform 480ms ease-out;
+}
+
+/* ---------- movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .revelar{opacity:1; transform:none}
+  .luz{animation:none !important}
+  *{transition-duration:1ms !important; animation-duration:1ms !important; animation-iteration-count:1 !important}
+}
+
+/* ============================================================
+   Páginas de política de privacidade
+   Fundo uniforme, sem decoração, largura de leitura curta.
+   ============================================================ */
+
+.legal{padding-block:var(--secao-y)}
+.legal__limite{
+  width:100%; max-width:760px;
+  margin-inline:auto; padding-inline:var(--margem);
+}
+.legal h1{font-size:clamp(28px,3.4vw,40px); line-height:1.14}
+.legal__data{margin-top:var(--e2); color:var(--text-secondary); font-size:15px}
+.legal__corpo{margin-top:var(--e6); display:grid; gap:var(--e6)}
+.legal__corpo h2{font-size:22px; margin-bottom:var(--e2)}
+.legal__corpo p, .legal__corpo li{color:var(--text-secondary); font-size:17px; line-height:1.75}
+.legal__corpo ul{display:grid; gap:var(--e1); padding-left:var(--e3); list-style:disc}
+/* Endereços longos quebram em vez de furar a tela. */
+.legal__corpo a{color:var(--accent); overflow-wrap:anywhere}
+
+.pendente{
+  display:grid; gap:var(--e1);
+  margin-top:var(--e2); padding:var(--e3);
+  border:1px dashed rgba(162,139,244,.42); border-radius:16px;
+  background:rgba(162,139,244,.07);
+}
+.pendente strong{
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent);
+}
+.pendente p{font-size:15px}
+
+.aviso{
+  display:grid; gap:var(--e1);
+  margin-top:var(--e5); padding:var(--e3);
+  border:1px solid rgba(162,139,244,.38); border-radius:16px;
+  background:rgba(162,139,244,.09);
+}
+.aviso strong{color:var(--text)}
+.aviso p{color:var(--text-secondary); font-size:15px}
+
+.voltar{
+  display:inline-block; margin-top:var(--e6);
+  padding:10px 0; font-weight:600; color:var(--accent); text-decoration:none;
+}
+.voltar:hover, .voltar:focus-visible{text-decoration:underline}
+
+/* ---------- selo de prévia ---------- */
+
+.previa-selo{
+  position:fixed; left:14px; bottom:14px; z-index:20; pointer-events:none;
+  display:flex; align-items:center; gap:8px;
+  padding:7px 13px; border-radius:999px;
+  border:1px solid rgba(162,139,244,.34);
+  background:rgba(8,12,24,.82); backdrop-filter:blur(10px);
+  font-size:11px; font-weight:700; letter-spacing:.04em;
+  color:var(--text-secondary);
+}
+.previa-selo b{color:var(--accent); font-weight:800}
+@media (max-width:520px){ .previa-selo{font-size:10px; padding:6px 10px; left:10px; bottom:10px} }
+@media print{ .previa-selo{display:none} }
